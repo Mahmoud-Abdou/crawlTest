@@ -5,7 +5,7 @@ import file_manager
 import os
 import pickle
 import os.path
-cnt=1
+
 
 class P_finder(HTMLParser):
 
@@ -16,35 +16,34 @@ class P_finder(HTMLParser):
         self.ptag=""
         self.ttag=""
         self.title=""
+        self.found = True
+        self.para = page_url + '\n'
 
     def handle_starttag(self , tag , attrs):
+
         if tag == 'p' :
             self.ptag=tag
         if tag == 'title':
             self.ttag=tag
+    def handle_data(self, data):
+        #self.para = ""
+        if self.ttag=='title' and self.found == True:
+            #self.para += self.page_url
+            self.found = False
+            self.title = data
+            para += self.title + '\n'
+            return
 
     def handle_data(self, data):
-        para=""
-        if self.ttag=='title':
-            self.ttag=""
-            self.title = data
-
+        #self.para = ""
         if self.ptag=='p':
-            self.ptag=""
-            para += data
-            para+='\n'
-            print("pparaaaaaaaa ya gama3a paraaa")
-            t = threading.Thread(target = write_data,args=(self.page_url, para,self.title,cnt),)
-            cnt=cnt+1
-            t.start()
+            #print(self.para)
+            self.para += data
+        #print(self.para)
+
+    def page_links(self):
+        return self.para
+
 
     def error(self, message):
         pass
-
-def write_data(link,text,title,cnt):
-    print ("cnt = "+cnt)
-    name=str(cnt)+".txt"
-    f = open(name,'w')
-    out=str(link)+"\n"+str(title)+"\n"+str(text)
-    f.write(out)
-    return

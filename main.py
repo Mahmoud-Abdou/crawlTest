@@ -5,11 +5,11 @@ from domain import *
 from general import *
 from manager import *
 
-PAGES = ['https://stackoverflow.com', 'https://stackoverflow.com', 'https://stackoverflow.com', 'https://stackoverflow.com']
+PAGES = ['https://quora.com', 'https://stackoverflow.com', 'https://codeforces.com']
 depth = 0
 not_ready_queue = Queue()
 ready_queue = Queue()
-ready_queue.put('https://stackoverflow.com')
+ready_queue.put('https://quora.com')
 
 def create_spiders():
     for i in PAGES:
@@ -81,4 +81,3 @@ def crawl():
 create_spiders()
 crawl()
 '''
-

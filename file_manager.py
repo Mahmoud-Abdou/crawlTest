@@ -2,7 +2,6 @@ import pickle
 import os.path
 class file_manager:
     def __init__(self):
-
         return
 
     def read_visited(self,head,tail):
@@ -35,4 +34,3 @@ class file_manager:
 
 
 #print (file_manager.read_visited("asd","/t/a/w"))
-

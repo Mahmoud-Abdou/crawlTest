@@ -4,6 +4,9 @@ from linkfinder import *
 from general import *
 from queue import Queue
 from p_finder import *
+
+cnt=1
+
 class Spider:
     base_url = ''
     domain_name =''
@@ -13,7 +16,7 @@ class Spider:
         self.domain_name = domain_name
         while True:
             if ready_queue.empty() == False:
-                print(ready_queue.get(False))
+                #print(ready_queue.get(False))
                 self.gather_links(self.base_url, ready_queue,not_ready_queue)
 
 
@@ -33,6 +36,18 @@ class Spider:
                 not_ready_queue.put(finder.links.get(False))
             pfinder = P_finder(self.base_url, page_url)
             pfinder.feed(html_string)
+            #print(pfinder.para)
+            #print('------------------------------------------------------------------------------------------------------------------------')
+            #t = threading.Thread(target = write_data,args=(page_url, pfinder.para,self.title,cnt),)
+            global cnt
+            cnt = cnt+1
+        #    t.start()
         except Exception as e:
             print(e)
 
+    def write_data(link,text,title,cnt):
+         name=str(cnt)+".txt"
+         f = open(name,'w')
+         out=str(link)+"\n"+str(title)+"\n"+str(text)
+         f.write(out)
+         return
