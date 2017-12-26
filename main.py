@@ -5,27 +5,20 @@ from domain import *
 from general import *
 from manager import *
 
-PAGES = ['https://quora.com', 'https://stackoverflow.com', 'https://codeforces.com']
+PAGES = ['https://maktoob.yahoo.com/?p=us','https://news.google.com/news/?gl=US&ned=us&hl=en']
 depth = 0
 not_ready_queue = Queue()
 ready_queue = Queue()
-ready_queue.put('https://quora.com')
-
+ready_queue.put('https://en.wikipedia.org/wiki/Main_Page','https://play.google.com/store/apps')
+mapp={}
 def create_spiders():
     for i in PAGES:
-        DOMAIN_NAME = get_domain_name(i)
+        DOMAIN_NAME = i.split('/')[2]
         t = threading.Thread(target = Spider,args=(i, DOMAIN_NAME,ready_queue,not_ready_queue),)
         t.start()
-        tt=threading.Thread(target= waiting , args=(ready_queue,not_ready_queue),)
+        tt=threading.Thread(target= waiting , args=(ready_queue,not_ready_queue,mapp),)
         tt.start()
-        return
-
-
-
 create_spiders()
-
-
-
 
 
 

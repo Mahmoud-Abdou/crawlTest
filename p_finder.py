@@ -7,6 +7,7 @@ import pickle
 import os.path
 
 
+
 class P_finder(HTMLParser):
 
     def __init__ (self , base_url , page_url):
@@ -26,20 +27,15 @@ class P_finder(HTMLParser):
         if tag == 'title':
             self.ttag=tag
     def handle_data(self, data):
-        #self.para = ""
         if self.ttag=='title' and self.found == True:
-            #self.para += self.page_url
             self.found = False
             self.title = data
             para += self.title + '\n'
             return
 
     def handle_data(self, data):
-        #self.para = ""
         if self.ptag=='p':
-            #print(self.para)
             self.para += data
-        #print(self.para)
 
     def page_links(self):
         return self.para

@@ -14,12 +14,8 @@ class Linkfinder(HTMLParser):
         if tag == 'a' :
             for(attribute , value) in attrs:
                 if attribute == 'href' :
-                    #print(value)
                     url = urljoin(self.base_url , value)
-                    #domain = url.split('/')[2]
                     full_link = url ;
-                    #print("domain = "+domain)
-                    #print("full_link = "+full_link)
                     self.links.put(full_link)
 
     def page_links(self):
@@ -27,4 +23,3 @@ class Linkfinder(HTMLParser):
 
     def error(self, message):
         pass
-
